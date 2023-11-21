@@ -2,3 +2,6 @@ pandas
 numpy
 ggplot
 plotnine
+scikit-learn
+seaborn
+matplotlib
