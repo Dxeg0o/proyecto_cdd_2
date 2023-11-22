@@ -2,3 +2,5 @@ pandas
 numpy
 ggplot
 plotnine
+seaborn
+scikit_learn
