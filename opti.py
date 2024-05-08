@@ -1,28 +1,27 @@
-import gurobipy as gp
+from gurobipy import *
 
 # Crear un modelo
-m = gp.Model("ejemplo")
+m = Model("ejemplo")
 
 # Crear variables
-x = m.addVar(lb=0.0, ub=1.0, vtype=gp.GRB.CONTINUOUS, name="x")
-y = m.addVar(lb=0.0, ub=1.0, vtype=gp.GRB.CONTINUOUS, name="y")
+x = m.addVar(vtype=GRB.CONTINUOUS, name="x")
+y = m.addVar(vtype=GRB.CONTINUOUS, name="y")
+z = m.addVar(vtype=GRB.CONTINUOUS, name="z")
 
-# Agregar una restricción
-m.addConstr(x + 2*y >= 1, "c0")
 
 # Establecer la función objetivo
-m.setObjective(x + y, gp.GRB.MAXIMIZE)
+m.setObjective(x + 2*y + 3*z, GRB.MAXIMIZE)
+
+
+# Agregar restricciones
+m.addConstr(x + y + z <= 4)
+m.addConstr(2*x + y <= 3)
+m.addConstr(x + 2*z <= 1)
+
+m.write("ejemplo.lp")
+m.display()
 
 # Resolver el modelo
 m.optimize()
-
-# Imprimir resultado
-if m.status == gp.GRB.OPTIMAL:
-    print('Valor óptimo:', m.objVal)
-    print('Valor de x:', x.x)
-    print('Valor de y:', y.x)
-else:
-    print('El modelo no tiene solución óptima.')
-
-
-    print('hola mundo')
+m.ObjVal
+m.getVars()
