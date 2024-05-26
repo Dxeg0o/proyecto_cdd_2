@@ -2,6 +2,6 @@ pandas
 numpy
 ggplot
 plotnine
-scikit-learn
 seaborn
+scikit_learn
 matplotlib
